@@ -1,0 +1,8 @@
+CXX_STD = CXX14
+PKG_LIBS = $(SHLIB_OPENMP_CXXFLAGS)
+PKG_CXXFLAGS = -march=native -mtune=native $(SHLIB_OPENMP_CXXFLAGS) \
+ -ffixed-xmm16 -ffixed-xmm17 -ffixed-xmm18 -ffixed-xmm19 \
+ -ffixed-xmm20 -ffixed-xmm21 -ffixed-xmm22 -ffixed-xmm23 \
+ -ffixed-xmm24 -ffixed-xmm25 -ffixed-xmm26 -ffixed-xmm27 \
+ -ffixed-xmm28 -ffixed-xmm29 -ffixed-xmm30 -ffixed-xmm31
+PKG_CFLAGS = -march=native -mtune=native $(SHLIB_OPENMP_CXXFLAGS)
