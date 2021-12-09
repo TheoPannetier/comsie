@@ -32,7 +32,7 @@ or if the length differs from the expectation.
 }
 
 \code{comrad} contains several \code{dd_model} functions, see for example
-\code{\link[=dd_model_lc]{dd_model_lc()}}.}
+\code{\link[comrad:dd_model_lc]{comrad::dd_model_lc()}}.}
 
 \item{stem_or_crown}{character, either "stem" or "crown", should the
 simulation start from 1 species (stem lineage) or 2 species (crown lineages)?}

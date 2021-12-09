@@ -12,7 +12,7 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 
 // draw_nb_offspring_cpp
 std::vector<int> draw_nb_offspring_cpp(std::vector<float> fitness);
-RcppExport SEXP _comrad_draw_nb_offspring_cpp(SEXP fitnessSEXP) {
+RcppExport SEXP _comsie_draw_nb_offspring_cpp(SEXP fitnessSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -23,7 +23,7 @@ END_RCPP
 }
 // get_n_eff_cpp
 DoubleVector get_n_eff_cpp(const DoubleVector& z, float competition_sd, const std::string& brute_force_opt);
-RcppExport SEXP _comrad_get_n_eff_cpp(SEXP zSEXP, SEXP competition_sdSEXP, SEXP brute_force_optSEXP) {
+RcppExport SEXP _comsie_get_n_eff_cpp(SEXP zSEXP, SEXP competition_sdSEXP, SEXP brute_force_optSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -36,7 +36,7 @@ END_RCPP
 }
 // simd_size
 int simd_size();
-RcppExport SEXP _comrad_simd_size() {
+RcppExport SEXP _comsie_simd_size() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -46,13 +46,13 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_comrad_draw_nb_offspring_cpp", (DL_FUNC) &_comrad_draw_nb_offspring_cpp, 1},
-    {"_comrad_get_n_eff_cpp", (DL_FUNC) &_comrad_get_n_eff_cpp, 3},
-    {"_comrad_simd_size", (DL_FUNC) &_comrad_simd_size, 0},
+    {"_comsie_draw_nb_offspring_cpp", (DL_FUNC) &_comsie_draw_nb_offspring_cpp, 1},
+    {"_comsie_get_n_eff_cpp", (DL_FUNC) &_comsie_get_n_eff_cpp, 3},
+    {"_comsie_simd_size", (DL_FUNC) &_comsie_simd_size, 0},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_comrad(DllInfo *dll) {
+RcppExport void R_init_comsie(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

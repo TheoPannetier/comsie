@@ -93,12 +93,6 @@ to speed up the calculation of competition coefficients. Defaults to "none".
 Other options are "omp", for multithreading with OpenMP, "simd" for single
 instruction, multiple data (SIMD) via the C++ library
 \href{https://github.com/xtensor-stack/xsimd}{\code{xsimd}}; and "simd_omp" for both.}
-
-\item{switch_carr_cap_sd_after}{if not \code{NA}, the value of \code{carrying_cap_sd} will
-switch to \code{switch_carr_cap_sd_to} at t = \code{switch_carr_cap_sd_after} + 1.}
-
-\item{switch_carr_cap_sd_to}{the value to switch \code{carrying_cap_sd} to if
-\code{switch_carr_cap_sd_after} is not \code{NA}.}
 }
 \value{
 Returns a table with a row corresponding to each individual, and five

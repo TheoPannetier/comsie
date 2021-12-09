@@ -17,6 +17,7 @@
 #' @param hex_fill character with two options, `"counts"` and `"species"`.
 #' `"counts"` colours hexes by the count of individuals, and `"species"` by
 #' species identity.
+#' @param alpha transparency parameter passed to ggplot
 #'
 #' @author Théo Pannetier
 #' @export

@@ -1,22 +1,22 @@
-Package: comrad
+Package: comsie
 Type: Package
 Title: R implementation of a Competitive Radiation model
-Version: 1.21.0
+Version: 0.1.0
 Author: Theo Pannetier
 Maintainer: Theo Pannetier <t.s.c.pannetier@rug.nl>
-Description: This R package is based on the eco-evolutionary model introduced in 
-    Pontarp et al.(2012), and simulates the evolution of a community where 
-    individuals undergo speciation, inter- and intra-specific competition, 
-    and dispersal in a spatially explicit setting.
+Description: Individual-based simulation of diversification with Lotka-Volterra 
+    competition on an island.
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests: 
     testthat (>= 2.1.0),
-    knitr
+    knitr,
+    lattice,
+    gganimate,
+    nLTT
 Imports: 
     ape,
-    covr,
     ggplot2,
     readr,
     dplyr,
@@ -29,14 +29,9 @@ Imports:
     rmarkdown,
     charlatan,
     rappdirs,
-    lattice,
-    gganimate,
     Rcpp,
     RcppXsimd,
-    subplex,
-    MASS,
-    nLTT,
-    castor
+    subplex
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 VignetteBuilder: knitr

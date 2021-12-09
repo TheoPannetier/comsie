@@ -15,7 +15,7 @@
 NULL
 
 draw_nb_offspring_cpp <- function(fitness) {
-    .Call('_comrad_draw_nb_offspring_cpp', PACKAGE = 'comrad', fitness)
+    .Call('_comsie_draw_nb_offspring_cpp', PACKAGE = 'comsie', fitness)
 }
 
 #' SIMD size
@@ -46,10 +46,10 @@ NULL
 #' @author Hanno Hildenbrandt
 #' @export
 get_n_eff_cpp <- function(z, competition_sd, brute_force_opt = "none") {
-    .Call('_comrad_get_n_eff_cpp', PACKAGE = 'comrad', z, competition_sd, brute_force_opt)
+    .Call('_comsie_get_n_eff_cpp', PACKAGE = 'comsie', z, competition_sd, brute_force_opt)
 }
 
 simd_size <- function() {
-    .Call('_comrad_simd_size', PACKAGE = 'comrad')
+    .Call('_comsie_simd_size', PACKAGE = 'comsie')
 }
 

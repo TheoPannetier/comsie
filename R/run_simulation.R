@@ -21,10 +21,6 @@
 #' @param seed integer \code{> 0}, the seed to set for the random number
 #' generator. Defaults to an integer based on current day and time.
 #' @inheritParams default_params_doc
-#' @param switch_carr_cap_sd_after if not `NA`, the value of `carrying_cap_sd` will
-#' switch to `switch_carr_cap_sd_to` at t = `switch_carr_cap_sd_after` + 1.
-#' @param switch_carr_cap_sd_to the value to switch `carrying_cap_sd` to if
-#' `switch_carr_cap_sd_after` is not `NA`.
 #' @param hpc_job_id used to record a job ID in the metadata, only relevant for
 #' simulations run on a high-performance cluster. Otherwise takes value
 #' `"local"`.

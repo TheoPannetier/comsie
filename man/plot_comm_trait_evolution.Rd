@@ -33,6 +33,8 @@ table}
 \item{ylim}{numeric vector, the range of y-values, passed to
 \code{ggplot::coord_cartesian()} if not \code{NULL}.}
 
+\item{alpha}{transparency parameter passed to ggplot}
+
 \item{hex_fill}{character with two options, \code{"counts"} and \code{"species"}.
 \code{"counts"} colours hexes by the count of individuals, and \code{"species"} by
 species identity.}

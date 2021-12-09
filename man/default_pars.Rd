@@ -9,7 +9,6 @@
 \alias{default_growth_rate}
 \alias{default_prob_mutation}
 \alias{default_mutation_sd}
-\alias{default_init_comm}
 \alias{default_seed}
 \alias{default_sampling_frac}
 \alias{default_trait_dist_sp}
@@ -28,8 +27,6 @@ default_growth_rate()
 default_prob_mutation()
 
 default_mutation_sd()
-
-default_init_comm()
 
 default_seed()
 

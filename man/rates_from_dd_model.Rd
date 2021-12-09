@@ -28,7 +28,7 @@ or if the length differs from the expectation.
 }
 
 \code{comrad} contains several \code{dd_model} functions, see for example
-\code{\link[=dd_model_lc]{dd_model_lc()}}.}
+\code{\link[comrad:dd_model_lc]{comrad::dd_model_lc()}}.}
 
 \item{params}{a named vector containing the values of the parameters of
 \code{speciation_func} and \code{extinction_func}.}

@@ -8,6 +8,10 @@ default_params_doc(
   comm,
   trait_ind,
   traits_comm,
+  island_comm,
+  mainland_comm,
+  mainland_nb_species,
+  mainland_z_sd,
   competition_sd,
   trait_opt,
   carrying_cap_opt,
@@ -36,6 +40,30 @@ mainland species that this species' clade originates from.
 
 \item{traits_comm}{numeric vector of variable length, the trait values of
 every individual in the community.}
+
+\item{island_comm}{a tibble with one row per individual in the community and three
+columns:
+\itemize{
+\item \code{z} contains (numeric) traits values
+\item \code{species} contains species names (characters)
+\item \code{ancestral_species} contains acnestral species names (characters)
+\item (optionally, if immigration is enabled) \code{root_species} (characters), the
+mainland species that this species' clade originates from.
+}}
+
+\item{mainland_comm}{a tibble defining what species exist in the mainland and
+their trait distribution. One row per species, three columns:
+\itemize{
+\item \code{species}, (character) the name of the species
+\item \code{mean_z}, (numeric) mean value of the trait for that species
+\item \code{z_sd}, (numeric) standard deviation of the trait for that species
+}}
+
+\item{mainland_nb_species}{integer, the number of species in the island
+community.}
+
+\item{mainland_z_sd}{standard deviation of the trait distribution of mainland
+species}
 
 \item{competition_sd}{numeric \verb{>= 0}.Parameter \eqn{\sigma_{\alpha}} of
 the competition coefficient. Modulates the the strength of competition
@@ -70,30 +98,6 @@ for?}
 
 \item{comrad_tbl}{a tibble containing the output of a \code{comrad} simulation,
 as produced by \code{\link[=run_simulation]{run_simulation()}} or read by \code{\link[=read_comrad_tbl]{read_comrad_tbl()}}.}
-
-\item{island_comm}{a tibble with one row per individual in the community and three
-columns:
-\itemize{
-\item \code{z} contains (numeric) traits values
-\item \code{species} contains species names (characters)
-\item \code{ancestral_species} contains acnestral species names (characters)
-\item (optionally, if immigration is enabled) \code{root_species} (characters), the
-mainland species that this species' clade originates from.
-}}
-
-\item{mainland_comm}{a tibble defining what species exist in the mainland and
-their trait distribution. One row per species, three columns:
-\itemize{
-\item \code{species}, (character) the name of the species
-\item \code{mean_z}, (numeric) mean value of the trait for that species
-\item \code{z_sd}, (numeric) standard deviation of the trait for that species
-}}
-
-\item{mainland_nb_species}{integer, the number of species in the island
-community.}
-
-\item{mainland_z_sd}{standard deviation of the trait distribution of mainland
-species}
 }
 \description{
 This function does nothing. It is intended to inherit is parameters'
