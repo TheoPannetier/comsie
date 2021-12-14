@@ -7,14 +7,14 @@
 draw_comm_next_gen(
   island_comm,
   mainland_comm,
-  growth_rate = default_growth_rate(),
-  competition_sd = default_competition_sd(),
-  trait_opt = default_trait_opt(),
-  carrying_cap_opt = default_carrying_cap_opt(),
-  carrying_cap_sd = default_carrying_cap_sd(),
-  prob_mutation = default_prob_mutation(),
-  mutation_sd = default_mutation_sd(),
-  trait_dist_sp = default_trait_dist_sp(),
+  growth_rate = comrad::default_growth_rate(),
+  competition_sd = comrad::default_competition_sd(),
+  trait_opt = comrad::default_trait_opt(),
+  carrying_cap_opt = comrad::default_carrying_cap_opt(),
+  carrying_cap_sd = comrad::default_carrying_cap_sd(),
+  prob_mutation = comrad::default_prob_mutation(),
+  mutation_sd = comrad::default_mutation_sd(),
+  trait_dist_sp = comrad::default_trait_dist_sp(),
   brute_force_opt = "none"
 )
 }

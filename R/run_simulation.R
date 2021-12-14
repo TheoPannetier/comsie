@@ -13,7 +13,7 @@
 #' time a speciation or extinction happens, and `sampling_freq` is ignored and
 #' must be set to `NA`.
 #' @param sampling_freq numeric \code{> 0}, the frequency (in generations) at
-#' which the community is written to output. See [set_sampling_freq()] for the
+#' which the community is written to output. See [comrad::set_sampling_freq()] for the
 #' default option.
 #' @param sampling_frac numeric (between 0 and 1), fraction of the community
 #' (in terms of individuals) written to output at every sampled generation. A
@@ -37,7 +37,7 @@
 #' If `path_to_output = NULL`, the community at the last generation is returned.
 #' If the path to a `.csv` file is supplied, each sampled generation is appended
 #' to the file. In the `.csv`, the table is preceded by some lines of metadata,
-#' which are automatically ignored if the file is read with [read_comrad_tbl()].
+#' which are automatically ignored if the file is read with [comrad::read_comrad_tbl()].
 #'
 #' @author Théo Pannetier
 #' @export

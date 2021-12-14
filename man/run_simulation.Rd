@@ -8,7 +8,7 @@ run_simulation(
   path_to_output,
   nb_gens,
   immigration_rate = NA,
-  mainland_nb_species,
+  mainland_nb_species = 1000,
   mainland_z_sd = 0.1,
   growth_rate = comrad::default_growth_rate(),
   competition_sd = comrad::default_competition_sd(),

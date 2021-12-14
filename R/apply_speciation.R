@@ -27,7 +27,7 @@
 #' @author Théo Pannetier
 #' @export
 
-apply_speciation <- function(island_comm, mainland_comm, trait_dist_sp = default_trait_dist_sp()) {
+apply_speciation <- function(island_comm, mainland_comm, trait_dist_sp = comrad::default_trait_dist_sp()) {
 
   existing_sp_names <- unique(c(island_comm$species, mainland_comm$species))
 

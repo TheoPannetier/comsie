@@ -15,7 +15,8 @@ Suggests:
     lattice,
     gganimate,
     nLTT
-Imports: 
+Imports:
+    comrad,
     ape,
     ggplot2,
     readr,
