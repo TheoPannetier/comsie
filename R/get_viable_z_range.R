@@ -12,7 +12,7 @@ get_viable_z_range <- function(pop_size,
 ) {
   carr_cap_tbl <- tibble::tibble(
     "z" = seq(0, 20, 0.01),
-    "k_z" = get_carrying_cap(
+    "k_z" = comrad::get_carrying_cap(
       trait_ind = z,
       trait_opt = trait_opt,
       carrying_cap_opt = carrying_cap_opt,
