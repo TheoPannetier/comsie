@@ -46,7 +46,7 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
   path_to_output,
   nb_gens,
   immigration_rate = NA,
-  mainland_nb_species,
+  mainland_nb_species = 1000,
   mainland_z_sd = 0.1,
   growth_rate = comrad::default_growth_rate(),
   competition_sd = comrad::default_competition_sd(),
@@ -130,6 +130,9 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
   # Prepare metadata
   metadata_string <- paste0(
     "### Metadata ###",
+    "\nimmigration_rate = ", immigration_rate,
+    "\nmainland_nb_species = ", mainland_nb_species,
+    "\nmainland_z_sd = ", mainland_z_sd,
     "\ncompetition_sd = ", competition_sd,
     "\ncarrying_cap_sd = ", carrying_cap_sd,
     "\ncarrying_cap_opt = ", carrying_cap_opt,
@@ -141,7 +144,7 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
     "\n",
     "\nseed = ", seed,
     "\nHPC job ID = ", hpc_job_id,
-    "\nsimulated under comrad ", as.character(utils::packageVersion("comrad")),
+    "\nsimulated under comsie ", as.character(utils::packageVersion("comsie")),
     "\n", R.version$version.string,
     "\n",
     "\n",
@@ -152,20 +155,7 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
     cat(metadata_string)
   }
 
-  if (!is.null(path_to_output)) {
-    cat(
-      metadata_string,
-      # Set up output table
-      "\n### Simulation output ###",
-      "\n",
-      "\nt,z,species,ancestral_species,root_species\n",
-      file = path_to_output
-    )
-  }
-
-  set.seed(seed)
-
-  # Draw initial community
+  # Draw mainland community
   z_range <- get_viable_z_range(
     pop_size = 10,
     trait_opt = trait_opt,
@@ -177,6 +167,29 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
     z_range = z_range,
     mainland_z_sd = mainland_z_sd
   )
+
+  if (!is.null(path_to_output)) {
+    cat(
+      "\n### Mainland community ###",
+      "\nspecies,mean_z,sd_z\n",
+      file = path_to_output
+    )
+    readr::write_csv(
+      mainland_comm,
+      file = path_to_output,
+      append = TRUE
+    )
+    cat(
+      metadata_string,
+      # Set up output table
+      "\n\n### Simulation output ###",
+      "\n",
+      "\nt,z,species,ancestral_species,root_species\n",
+      file = path_to_output
+    )
+  }
+
+  set.seed(seed)
 
   # Draw ten immigrants from mainland to seed island community
   init_comm <- sample_immigrant_from_mainland(
