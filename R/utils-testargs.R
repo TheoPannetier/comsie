@@ -105,7 +105,7 @@ testarg_length <- function(arg, correct_length) {
 #' @inheritParams default_params_doc
 #' @export
 #' @rdname testargs
-test_comrad_comm <- function(comm) {
+test_island_comm <- function(comm) {
   if (!tibble::is_tibble(comm)) {
     stop("'", substitute(comm), "' should be a tibble.")
   }
@@ -132,43 +132,43 @@ test_comrad_comm <- function(comm) {
   }
 }
 
-#' @param comrad_tbl a tibble containing the output of a `comrad` simulation,
+#' @param comsie_tbl a tibble containing the output of a `comrad` simulation,
 #' as produced by [run_simulation()].
 #' @export
 #' @rdname testargs
-test_comrad_tbl <- function(comrad_tbl) {
-  if (!tibble::is_tibble(comrad_tbl)) {
-    stop("'", substitute(comrad_tbl), "' is not a tibble.")
+test_comsie_tbl <- function(comsie_tbl) {
+  if (!tibble::is_tibble(comsie_tbl)) {
+    stop("'", substitute(comsie_tbl), "' is not a tibble.")
   }
-  if (length(attributes(comrad_tbl)$row.names) == 0) {
-    stop("'", substitute(comrad_tbl), "' is empty.")
+  if (length(attributes(comsie_tbl)$row.names) == 0) {
+    stop("'", substitute(comsie_tbl), "' is empty.")
   }
-  if (!length(attributes(comrad_tbl)$names) %in% 4:5) {
-    stop("'", substitute(comrad_tbl), "' should have 4 or 5 columns.")
+  if (!length(attributes(comsie_tbl)$names) %in% 4:5) {
+    stop("'", substitute(comsie_tbl), "' should have 4 or 5 columns.")
   }
   if (any(
-    !attributes(comrad_tbl)$names %in% c("t", "z", "species", "ancestral_species", "root_species")
+    !attributes(comsie_tbl)$names %in% c("t", "z", "species", "ancestral_species", "root_species")
   )) {
     stop(
-      "'", substitute(comrad_tbl),
+      "'", substitute(comsie_tbl),
       "' should have columns 't', z', 'species', 'ancestral_species' and (optionally) 'root_species'."
     )
   }
   col_classes <- c(
-    class(comrad_tbl$t),
-    class(comrad_tbl$z),
-    class(comrad_tbl$species),
-    class(comrad_tbl$ancestral_species)
+    class(comsie_tbl$t),
+    class(comsie_tbl$z),
+    class(comsie_tbl$species),
+    class(comsie_tbl$ancestral_species)
   )
   if (any(col_classes != c("numeric", "numeric", "character", "character"))) {
     stop(
-      "'", substitute(comrad_tbl),
+      "'", substitute(comsie_tbl),
       "' col classes should be numeric, character and character, respectively."
     )
   }
-  if (ncol(comrad_tbl) == 5 && !class(comrad_tbl$root_species) == "character") {
+  if (ncol(comsie_tbl) == 5 && !class(comsie_tbl$root_species) == "character") {
     stop(
-      "'", substitute(comrad_tbl),
+      "'", substitute(comsie_tbl),
       "' col classes should be numeric, character, character and character, respectively."
     )
   }

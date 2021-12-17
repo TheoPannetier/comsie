@@ -97,7 +97,7 @@ for?}
 \item{fitness_func, }{the name of the function used to compute fitness.}
 
 \item{comrad_tbl}{a tibble containing the output of a \code{comrad} simulation,
-as produced by \code{\link[=run_simulation]{run_simulation()}} or read by \code{\link[=read_comrad_tbl]{read_comrad_tbl()}}.}
+as produced by \code{\link[=run_simulation]{run_simulation()}} or read by \code{\link[comrad:read_comrad_tbl]{comrad::read_comrad_tbl()}}.}
 }
 \description{
 This function does nothing. It is intended to inherit is parameters'

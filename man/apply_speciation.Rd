@@ -7,7 +7,7 @@
 apply_speciation(
   island_comm,
   mainland_comm,
-  trait_dist_sp = default_trait_dist_sp()
+  trait_dist_sp = comrad::default_trait_dist_sp()
 )
 }
 \arguments{

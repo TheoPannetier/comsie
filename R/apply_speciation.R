@@ -31,7 +31,7 @@ apply_speciation <- function(island_comm, mainland_comm, trait_dist_sp = comrad:
 
   existing_sp_names <- unique(c(island_comm$species, mainland_comm$species))
 
-  comrad::test_comrad_comm(island_comm)
+  test_island_comm(island_comm)
 
   # Resolve cladogenetic speciation
   island_comm <- island_comm[order(island_comm$z), ]
@@ -45,9 +45,8 @@ apply_speciation <- function(island_comm, mainland_comm, trait_dist_sp = comrad:
     nb_inds <- length(sp_members$z)
 
     # Check for gaps in trait values -------------------------------------------
-    traits <- sp_members$z
     gaps <- comrad::find_trait_gaps(
-      traits = traits,
+      traits =  sp_members$z,
       trait_dist_sp = trait_dist_sp
     )
 
@@ -114,6 +113,5 @@ apply_speciation <- function(island_comm, mainland_comm, trait_dist_sp = comrad:
       island_comm$ancestral_species <- sp
     }
   }
-
   return(island_comm)
 }

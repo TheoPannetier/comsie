@@ -15,7 +15,6 @@ run_simulation(
   carrying_cap_sd = comrad::default_carrying_cap_sd(),
   carrying_cap_opt = comrad::default_carrying_cap_opt(),
   trait_opt = comrad::default_trait_opt(),
-  prob_mutation = comrad::default_prob_mutation(),
   mutation_sd = comrad::default_mutation_sd(),
   trait_dist_sp = comrad::default_trait_dist_sp(),
   sampling_on_event = FALSE,
@@ -60,9 +59,6 @@ moving away from the optimal trait value.}
 \item{trait_opt}{numeric. The optimal trait value, \eqn{z_{opt}}.
 \code{get_carrying_cap(trait_opt) = carrying_cap_opt}.}
 
-\item{prob_mutation}{numeric between 0 and 1, the probability that any new
-individual is sampled with a mutation.}
-
 \item{mutation_sd}{numeric \verb{>= 0}, the standard deviation of the normal
 distrbution from which mutations are drawn.}
 
@@ -74,7 +70,7 @@ time a speciation or extinction happens, and \code{sampling_freq} is ignored and
 must be set to \code{NA}.}
 
 \item{sampling_freq}{numeric \code{> 0}, the frequency (in generations) at
-which the community is written to output. See \code{\link[=set_sampling_freq]{set_sampling_freq()}} for the
+which the community is written to output. See \code{\link[comrad:set_sampling_freq]{comrad::set_sampling_freq()}} for the
 default option.}
 
 \item{sampling_frac}{numeric (between 0 and 1), fraction of the community
@@ -102,7 +98,7 @@ previous species it descends from.
 If \code{path_to_output = NULL}, the community at the last generation is returned.
 If the path to a \code{.csv} file is supplied, each sampled generation is appended
 to the file. In the \code{.csv}, the table is preceded by some lines of metadata,
-which are automatically ignored if the file is read with \code{\link[=read_comrad_tbl]{read_comrad_tbl()}}.
+which are automatically ignored if the file is read with \code{\link[comrad:read_comrad_tbl]{comrad::read_comrad_tbl()}}.
 }
 \description{
 Run the competitive radiation simulation.

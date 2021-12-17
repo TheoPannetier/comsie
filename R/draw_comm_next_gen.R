@@ -21,14 +21,12 @@ draw_comm_next_gen <- function(
   trait_opt = comrad::default_trait_opt(),
   carrying_cap_opt = comrad::default_carrying_cap_opt(),
   carrying_cap_sd = comrad::default_carrying_cap_sd(),
-  prob_mutation = comrad::default_prob_mutation(),
   mutation_sd = comrad::default_mutation_sd(),
   trait_dist_sp = comrad::default_trait_dist_sp(),
   brute_force_opt = "none"
 ) {
-
   # Test argument type ---------------------------------------------------------
-  comrad::test_comrad_comm(island_comm)
+  test_island_comm(island_comm)
   comrad::testarg_num(growth_rate)
   comrad::testarg_pos(growth_rate)
   comrad::testarg_num(competition_sd)
@@ -38,8 +36,6 @@ draw_comm_next_gen <- function(
   comrad::testarg_pos(carrying_cap_opt)
   comrad::testarg_num(carrying_cap_sd)
   comrad::testarg_pos(carrying_cap_sd)
-  comrad::testarg_num(prob_mutation)
-  comrad::testarg_prop(prob_mutation)
   comrad::testarg_num(mutation_sd)
   comrad::testarg_pos(mutation_sd)
 
@@ -58,7 +54,7 @@ draw_comm_next_gen <- function(
   }
 
   # Create next generation from parent fitness ---------------------------------
-  nb_offspring_comm <- comrad::draw_nb_offspring_cpp(
+  nb_offspring_comm <- comrad::draw_nb_offspring(
     fitness = fitness_comm
   )
   comrad::testarg_length(nb_offspring_comm, length(island_comm$z))
@@ -79,7 +75,6 @@ draw_comm_next_gen <- function(
   # Draw and apply mutations ---------------------------------------------------
   new_comm$z <- comrad::apply_mutations(
     traits_comm = new_comm$z,
-    prob_mutation = prob_mutation,
     mutation_sd = mutation_sd
   )
   # Resolve speciation ---------------------------------------------------------
@@ -88,7 +83,7 @@ draw_comm_next_gen <- function(
     mainland_comm = mainland_comm,
     trait_dist_sp = trait_dist_sp
   )
-  comrad::test_comrad_comm(new_comm)
+  test_island_comm(new_comm)
 
   return(new_comm)
 }

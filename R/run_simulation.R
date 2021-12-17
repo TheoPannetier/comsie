@@ -53,7 +53,6 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
   carrying_cap_sd = comrad::default_carrying_cap_sd(),
   carrying_cap_opt = comrad::default_carrying_cap_opt(),
   trait_opt = comrad::default_trait_opt(),
-  prob_mutation = comrad::default_prob_mutation(),
   mutation_sd = comrad::default_mutation_sd(),
   trait_dist_sp = comrad::default_trait_dist_sp(),
   sampling_on_event = FALSE,
@@ -78,8 +77,10 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
   comrad::testarg_pos(nb_gens)
   comrad::testarg_not_this(nb_gens, c(0, Inf))
   comrad::testarg_int(nb_gens)
-  comrad::testarg_num(immigration_rate)
-  comrad::testarg_prop(immigration_rate)
+  if (!is.na(immigration_rate)) {
+    comrad::testarg_num(immigration_rate)
+    comrad::testarg_prop(immigration_rate)
+  }
   comrad::testarg_log(sampling_on_event)
   comrad::testarg_num(mainland_z_sd)
   comrad::testarg_pos(mainland_z_sd)
@@ -106,8 +107,6 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
   comrad::testarg_pos(carrying_cap_opt)
   comrad::testarg_num(carrying_cap_sd)
   comrad::testarg_pos(carrying_cap_sd)
-  comrad::testarg_num(prob_mutation)
-  comrad::testarg_prop(prob_mutation)
   comrad::testarg_num(mutation_sd)
   comrad::testarg_pos(mutation_sd)
   comrad::testarg_num(trait_dist_sp)
@@ -138,7 +137,6 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
     "\ncarrying_cap_opt = ", carrying_cap_opt,
     "\ntrait_opt = ", trait_opt,
     "\ngrowth_rate = ", growth_rate,
-    "\nprob_mutation = ", prob_mutation,
     "\nmutation_sd = ", mutation_sd,
     "\ntrait_dist_sp = ", trait_dist_sp,
     "\n",
@@ -170,6 +168,7 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
 
   if (!is.null(path_to_output)) {
     cat(
+      metadata_string,
       "\n### Mainland community ###",
       "\nspecies,mean_z,sd_z\n",
       file = path_to_output
@@ -180,12 +179,12 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
       append = TRUE
     )
     cat(
-      metadata_string,
       # Set up output table
       "\n\n### Simulation output ###",
       "\n",
       "\nt,z,species,ancestral_species,root_species\n",
-      file = path_to_output
+      file = path_to_output,
+      append = TRUE
     )
   }
 
@@ -198,10 +197,10 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
     dplyr::mutate("t" = 0, .before = 1)
 
   # Set up data output table proper
-  comrad_tbl <- init_comm
+  comsie_tbl <- init_comm
   if (!is.null(path_to_output)) {
     readr::write_csv(
-      comrad_tbl,
+      comsie_tbl,
       file = path_to_output,
       append = TRUE
     )
@@ -219,20 +218,19 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
   for (t in time_seq) {
     cat("\nt =", t)
     # Track changes in community composition
-    species_before <- unlist(dplyr::distinct(comrad_tbl, species))
+    species_before <- unlist(dplyr::distinct(comsie_tbl, species))
 
     # Replace current comm with next generation
-    comrad_tbl <- dplyr::bind_cols(
+    comsie_tbl <- dplyr::bind_cols(
       "t" = t,
       draw_comm_next_gen(
-        island_comm = comrad_tbl[, c("z", "species", "ancestral_species", "root_species")], # not t
+        island_comm = comsie_tbl[, c("z", "species", "ancestral_species", "root_species")], # not t
         mainland_comm = mainland_comm,
         growth_rate = growth_rate,
         competition_sd = competition_sd,
         trait_opt = trait_opt,
         carrying_cap_opt = carrying_cap_opt,
         carrying_cap_sd = carrying_cap_sd,
-        prob_mutation = prob_mutation,
         mutation_sd = mutation_sd,
         trait_dist_sp = trait_dist_sp,
         brute_force_opt = brute_force_opt
@@ -246,18 +244,18 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
       ) %>%
         dplyr::mutate("t" = t, .before = 1)
       cat("\nSpecies", unique(immigrant_pop$species), "immigrated on the island.")
-      comrad_tbl <- dplyr::bind_rows(comrad_tbl, immigrant_pop)
+      comsie_tbl <- dplyr::bind_rows(comsie_tbl, immigrant_pop)
       next_immigration <- t + (1 + stats::rgeom(1, prob = immigration_rate))
     }
 
     # Track changes in community composition
-    species_after <- unlist(dplyr::distinct(comrad_tbl, species))
+    species_after <- unlist(dplyr::distinct(comsie_tbl, species))
 
     # Resolve whole-community extinction
-    if (nrow(comrad_tbl) < 1) {
+    if (nrow(comsie_tbl) < 1) {
       cat("\nCommunity has gone extinct at generation", t, "\n")
       if (is.null(path_to_output)) {
-        return(comrad_tbl)
+        return(comsie_tbl)
       } else {
         return()
       }
@@ -275,7 +273,7 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
       if (!is.null(path_to_output)) {
         saved_seed <- .GlobalEnv$.Random.seed
         # Write only a sample of the output
-        sampled_output <- comrad_tbl %>%
+        sampled_output <- comsie_tbl %>%
           dplyr::slice_sample(prop = sampling_frac)
         # Make sure all species are present in sample
         species_sampled <- unique(sampled_output$species)
@@ -284,7 +282,7 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
           for (sp in not_sampled) {
             sampled_output <- dplyr::bind_rows(
               sampled_output,
-              comrad_tbl %>% dplyr::filter(species == sp)
+              comsie_tbl %>% dplyr::filter(species == sp)
             )
           }
         }
@@ -301,6 +299,6 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
   }
 
   if (is.null(path_to_output)) {
-    return(comrad_tbl)
+    return(comsie_tbl)
   }
 }
