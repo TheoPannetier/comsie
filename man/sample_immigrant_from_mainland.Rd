@@ -4,11 +4,9 @@
 \alias{sample_immigrant_from_mainland}
 \title{Sample a number of individuals from a mainland community}
 \usage{
-sample_immigrant_from_mainland(n, mainland_comm)
+sample_immigrant_from_mainland(mainland_comm, n = 1)
 }
 \arguments{
-\item{n}{integer, number of individuals to sample}
-
 \item{mainland_comm}{a tibble defining what species exist in the mainland and
 their trait distribution. One row per species, three columns:
 \itemize{
@@ -16,6 +14,8 @@ their trait distribution. One row per species, three columns:
 \item \code{mean_z}, (numeric) mean value of the trait for that species
 \item \code{z_sd}, (numeric) standard deviation of the trait for that species
 }}
+
+\item{n}{integer, number of individuals to sample}
 }
 \description{
 Individuals trait values are sampled in a normal distribution using the

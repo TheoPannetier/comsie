@@ -3,11 +3,11 @@
 #' Individuals trait values are sampled in a normal distribution using the
 #' parameters associated to the corresponding mainland species.
 #'
-#' @param n integer, number of individuals to sample
 #' @inheritParams default_params_doc
+#' @param n integer, number of individuals to sample
 #'
 #' @export
-sample_immigrant_from_mainland <- function(n, mainland_comm) {
+sample_immigrant_from_mainland <- function(mainland_comm, n = 1) {
 
   source_pop <- dplyr::slice_sample(mainland_comm, n = 1)
 
