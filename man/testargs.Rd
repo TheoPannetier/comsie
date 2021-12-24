@@ -2,49 +2,15 @@
 % Please edit documentation in R/utils-testargs.R
 \name{testargs}
 \alias{testargs}
-\alias{testarg_num}
-\alias{testarg_int}
-\alias{testarg_pos}
-\alias{testarg_prop}
-\alias{testarg_not_this}
-\alias{testarg_char}
-\alias{testarg_log}
-\alias{testarg_length}
 \alias{test_island_comm}
 \alias{test_comsie_tbl}
 \title{Assert a function argument is of correct type}
 \usage{
-testarg_num(arg, allow_nan = FALSE, allow_na = FALSE)
-
-testarg_int(arg)
-
-testarg_pos(arg)
-
-testarg_prop(arg)
-
-testarg_not_this(arg, forbidden)
-
-testarg_char(arg)
-
-testarg_log(arg)
-
-testarg_length(arg, correct_length)
-
 test_island_comm(comm)
 
 test_comsie_tbl(comsie_tbl)
 }
 \arguments{
-\item{arg}{value of the asserted argument.}
-
-\item{allow_nan}{logical, should NaNs pass the test?}
-
-\item{allow_na}{logical, should NAs pass the test?}
-
-\item{forbidden}{a vector containing forbidden values.}
-
-\item{correct_length}{numeric, the length the argument should have.}
-
 \item{comm}{a tibble with one row per individual in the community and three
 columns:
 \itemize{
@@ -57,26 +23,11 @@ mainland species that this species' clade originates from.
 
 \item{comsie_tbl}{a tibble containing the output of a \code{comrad} simulation,
 as produced by \code{\link[=run_simulation]{run_simulation()}}.}
+
+\item{arg}{value of the asserted argument.}
 }
 \description{
-\itemize{
-\item \code{testarg_num()} asserts that the argument is a numeric value.
-Also rejects \code{NaNs} and \code{NAs} by default.
-\item \code{testarg_prop()} asserts that the argument value lies between 0
-and 1.
-\item \code{testarg_pos()} asserts that the argument is positive.
-\item \code{testarg_not_this()} asserts that the argument is different
-from one or several forbidden values.
-\item \code{testarg_char()} asserts that the argument is a character.
-\item \code{testarg_log()} asserts that the argument is a logical.
-\item \code{testarg_length()} asserts that the argument has the correct
-length.
-\item \code{test_comrad_comm()} asserts the format of the supplied community
-is standard.
-}
-}
-\details{
-Currenty \code{testarg_not_this()} cannot be tested properly.
+Assert a function argument is of correct type
 }
 \author{
 Theo Pannetier

@@ -17,7 +17,6 @@ default_params_doc(
   carrying_cap_opt,
   carrying_cap_sd,
   growth_rate,
-  prob_mutation,
   mutation_sd,
   trait_dist_sp,
   nb_gens,
@@ -81,9 +80,6 @@ moving away from the optimal trait value.}
 
 \item{growth_rate}{numeric \verb{>= 0}, the baseline growth rate. Generations
 being discrete, high values will cause chaos.}
-
-\item{prob_mutation}{numeric between 0 and 1, the probability that any new
-individual is sampled with a mutation.}
 
 \item{mutation_sd}{numeric \verb{>= 0}, the standard deviation of the normal
 distrbution from which mutations are drawn.}

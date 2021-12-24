@@ -47,8 +47,6 @@
 #' `trait_opt`
 #' @param growth_rate numeric `>= 0`, the baseline growth rate. Generations
 #' being discrete, high values will cause chaos.
-#' @param prob_mutation numeric between 0 and 1, the probability that any new
-#' individual is sampled with a mutation.
 #' @param mutation_sd numeric `>= 0`, the standard deviation of the normal
 #' distrbution from which mutations are drawn.
 #' @param trait_dist_sp numeric, the minimal trait distance between two
@@ -74,7 +72,6 @@ default_params_doc <- function(
   carrying_cap_opt,
   carrying_cap_sd,
   growth_rate,
-  prob_mutation,
   mutation_sd,
   trait_dist_sp,
   nb_gens,
