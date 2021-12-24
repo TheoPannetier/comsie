@@ -46,8 +46,8 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
   path_to_output,
   nb_gens,
   immigration_rate = NA,
-  mainland_nb_species = 1000,
-  mainland_z_sd = 0.1,
+  mainland_nb_species = comsie::default_mainland_nb_species(),
+  mainland_z_sd = comsie::default_mainland_z_sd(),
   growth_rate = comrad::default_growth_rate(),
   competition_sd = comrad::default_competition_sd(),
   carrying_cap_sd = comrad::default_carrying_cap_sd(),
@@ -153,6 +153,8 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
     cat(metadata_string)
   }
 
+
+  set.seed(seed)
   # Draw mainland community
   z_range <- get_viable_z_range(
     pop_size = 10,
@@ -188,12 +190,10 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
     )
   }
 
-  set.seed(seed)
-
   # Draw ten immigrants from mainland to seed island community
-  init_comm <- sample_immigrant_from_mainland(
-    n = 10, mainland_comm = mainland_comm
-    ) %>%
+  init_comm <- sample_immigrant_from_mainland(mainland_comm) %>%
+    # make 10 copies of that immigrant to make sure init pop survives
+    dplyr::slice_sample(n = 10, replace = TRUE) %>%
     dplyr::mutate("t" = 0, .before = 1)
 
   # Set up data output table proper
@@ -239,9 +239,7 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
 
     # Resolve immigration if applicable
     if (!is.na(immigration_rate) && t == next_immigration) {
-      immigrant_pop <- sample_immigrant_from_mainland(
-        n = 1, mainland_comm = mainland_comm
-      ) %>%
+      immigrant_pop <- sample_immigrant_from_mainland(mainland_comm) %>%
         dplyr::mutate("t" = t, .before = 1)
       cat("\nSpecies", unique(immigrant_pop$species), "immigrated on the island.")
       comsie_tbl <- dplyr::bind_rows(comsie_tbl, immigrant_pop)
