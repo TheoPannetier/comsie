@@ -26,7 +26,7 @@ draw_comm_next_gen <- function(
   brute_force_opt = "none"
 ) {
   # Test argument type ---------------------------------------------------------
-  test_island_comm(island_comm)
+  comsie::test_island_comm(island_comm)
   comrad::testarg_num(growth_rate)
   comrad::testarg_pos(growth_rate)
   comrad::testarg_num(competition_sd)
@@ -78,12 +78,12 @@ draw_comm_next_gen <- function(
     mutation_sd = mutation_sd
   )
   # Resolve speciation ---------------------------------------------------------
-  new_comm <- apply_speciation(
+  new_comm <- comsie::apply_speciation(
     island_comm = new_comm,
     mainland_comm = mainland_comm,
     trait_dist_sp = trait_dist_sp
   )
-  test_island_comm(new_comm)
+  comsie::test_island_comm(new_comm)
 
   return(new_comm)
 }

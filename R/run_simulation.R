@@ -153,16 +153,15 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
     cat(metadata_string)
   }
 
-
   set.seed(seed)
   # Draw mainland community
-  z_range <- get_viable_z_range(
+  z_range <- comsie::get_viable_z_range(
     pop_size = 10,
     trait_opt = trait_opt,
     carrying_cap_opt = carrying_cap_opt,
     carrying_cap_sd = carrying_cap_sd
   )
-  mainland_comm <- create_mainland_comm(
+  mainland_comm <- comsie::create_mainland_comm(
     mainland_nb_species = mainland_nb_species,
     z_range = z_range,
     mainland_z_sd = mainland_z_sd
@@ -191,7 +190,7 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
   }
 
   # Draw ten immigrants from mainland to seed island community
-  init_comm <- sample_immigrant_from_mainland(mainland_comm) %>%
+  init_comm <- comsie::sample_immigrant_from_mainland(mainland_comm) %>%
     # make 10 copies of that immigrant to make sure init pop survives
     dplyr::slice_sample(n = 10, replace = TRUE) %>%
     dplyr::mutate("t" = 0, .before = 1)
@@ -216,14 +215,13 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
 
   # Go :)
   for (t in time_seq) {
-    cat("\nt =", t)
     # Track changes in community composition
     species_before <- unlist(dplyr::distinct(comsie_tbl, species))
 
     # Replace current comm with next generation
     comsie_tbl <- dplyr::bind_cols(
       "t" = t,
-      draw_comm_next_gen(
+      comsie::draw_comm_next_gen(
         island_comm = comsie_tbl[, c("z", "species", "ancestral_species", "root_species")], # not t
         mainland_comm = mainland_comm,
         growth_rate = growth_rate,
@@ -239,7 +237,7 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
 
     # Resolve immigration if applicable
     if (!is.na(immigration_rate) && t == next_immigration) {
-      immigrant_pop <- sample_immigrant_from_mainland(mainland_comm) %>%
+      immigrant_pop <- comsie::sample_immigrant_from_mainland(mainland_comm) %>%
         dplyr::mutate("t" = t, .before = 1)
       cat("\nSpecies", unique(immigrant_pop$species), "immigrated on the island.")
       comsie_tbl <- dplyr::bind_rows(comsie_tbl, immigrant_pop)

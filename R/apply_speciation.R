@@ -31,7 +31,7 @@ apply_speciation <- function(island_comm, mainland_comm, trait_dist_sp = comrad:
 
   existing_sp_names <- unique(c(island_comm$species, mainland_comm$species))
 
-  test_island_comm(island_comm)
+  comsie::test_island_comm(island_comm)
 
   # Resolve cladogenetic speciation
   island_comm <- island_comm[order(island_comm$z), ]
