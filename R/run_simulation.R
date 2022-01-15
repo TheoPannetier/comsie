@@ -5,7 +5,7 @@
 #' @param path_to_output character, path to save the output file, which must be
 #' a `.csv`. If `NULL`, the output is not saved and the final state of the
 #' community is returned at the end of the simulation.
-#' @param immigration_rate `NA` or a positive number, the rate at which
+#' @param immigration_rate a positive number, the rate at which
 #' external immigrant populations enter the community.
 #' @param nb_gens integer, the number of generations to run the
 #' simulation for.
@@ -45,7 +45,7 @@
 run_simulation <- function( # nolint, ignore high cyclomatic complexity
   path_to_output,
   nb_gens,
-  immigration_rate = NA,
+  immigration_rate,
   mainland_nb_species = comsie::default_mainland_nb_species(),
   mainland_z_sd = comsie::default_mainland_z_sd(),
   growth_rate = comrad::default_growth_rate(),
@@ -77,10 +77,8 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
   comrad::testarg_pos(nb_gens)
   comrad::testarg_not_this(nb_gens, c(0, Inf))
   comrad::testarg_int(nb_gens)
-  if (!is.na(immigration_rate)) {
-    comrad::testarg_num(immigration_rate)
-    comrad::testarg_prop(immigration_rate)
-  }
+  comrad::testarg_num(immigration_rate)
+  comrad::testarg_prop(immigration_rate)
   comrad::testarg_log(sampling_on_event)
   comrad::testarg_num(mainland_z_sd)
   comrad::testarg_pos(mainland_z_sd)
@@ -156,7 +154,7 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
   set.seed(seed)
   # Draw mainland community
   z_range <- comsie::get_viable_z_range(
-    pop_size = 10,
+    pop_size = 5,
     trait_opt = trait_opt,
     carrying_cap_opt = carrying_cap_opt,
     carrying_cap_sd = carrying_cap_sd
@@ -208,7 +206,7 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
   first_gen <- 0
   time_seq <- (first_gen + 1):(first_gen + nb_gens)
   next_immigration <- ifelse(
-    is.na(immigration_rate),
+    dplyr::near(immigration_rate, 0),
     Inf,
     time_seq[1] + stats::rgeom(1, prob = immigration_rate)
   )
@@ -236,7 +234,7 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
     )
 
     # Resolve immigration if applicable
-    if (!is.na(immigration_rate) && t == next_immigration) {
+    if (!dplyr::near(immigration_rate, 0) && t == next_immigration) {
       immigrant_pop <- comsie::sample_immigrant_from_mainland(mainland_comm) %>%
         dplyr::mutate("t" = t, .before = 1)
       cat("\nSpecies", unique(immigrant_pop$species), "immigrated on the island.")
