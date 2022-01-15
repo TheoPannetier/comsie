@@ -17,12 +17,13 @@
 plot_zt <- function(comsie_tbl, fill_by = "species", xlim, ylim, binwidths = c(100, 0.01), alpha = 1) {
 
   if (fill_by == "species") {
-    colour_names <- unique(comsie_tbl$species)
+    comsie_tbl <- comsie_tbl %>% dplyr::rename("fill_var" = species)
   } else if (fill_by == "clade"){
-    colour_names <- unique(comsie_tbl$root_species)
+    comsie_tbl <- comsie_tbl %>% dplyr::rename("fill_var" = root_species)
   } else {
     stop("\"fill_by\" must be either species or clade.")
   }
+  colour_names <- unique(comsie_tbl$fill_var)
   names(colour_names) <- colour_names
 
   gg <- comsie_tbl %>%
@@ -30,10 +31,11 @@ plot_zt <- function(comsie_tbl, fill_by = "species", xlim, ylim, binwidths = c(1
     ggplot2::scale_y_continuous(minor_breaks = seq(-10, 10, 0.1)) +
     ggplot2::labs(x = "Generation", y = "Trait") +
     ggplot2::geom_bin2d(
-      ggplot2::aes(fill = species),
+      ggplot2::aes(fill = fill_var),
       alpha = alpha,
       binwidth = binwidths,
-      size = 0.05, color = "black",
+      size = 0.01,
+      color = "black",
       show.legend = FALSE
     ) +
     ggplot2::scale_fill_manual(
@@ -41,5 +43,6 @@ plot_zt <- function(comsie_tbl, fill_by = "species", xlim, ylim, binwidths = c(1
     ) +
     ggplot2::coord_cartesian(xlim = xlim, ylim = ylim) +
     ggplot2::theme_bw()
+
   return(gg)
 }
