@@ -8,18 +8,20 @@
 #'
 #' @export
 sample_immigrant_from_mainland <- function(mainland_comm, n = 1) {
+  immig_i <- sample(1:nrow(mainland_comm), n)
 
-  source_pop <- dplyr::slice_sample(mainland_comm, n = 1)
+  # Increment nb immigration events
+  mainland_comm$nb_immig_events[immig_i] <- mainland_comm$nb_immig_events[immig_i] + 1
 
   immigrant_pop <- tibble::tibble(
     "z" = stats::rnorm(
       n = n,
-      mean = source_pop$mean_z,
-      sd = source_pop$sd_z
+      mean = mainland_comm$mean_z[immig_i],
+      sd = mainland_comm$sd_z[immig_i]
     ),
-    "species" = source_pop$species,
+    "species" = mainland_comm$species[immig_i],
     "ancestral_species" = as.character(NA),
-    "root_species" = species
+    "founder" = paste0(species, "_", mainland_comm$nb_immig_events[immig_i])
   )
-  return(immigrant_pop)
+  return(list("immigrant_pop" = immigrant_pop, "mainland_comm" = mainland_comm))
 }

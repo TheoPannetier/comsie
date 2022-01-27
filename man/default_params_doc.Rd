@@ -31,8 +31,7 @@ columns:
 \item \code{z} contains (numeric) traits values
 \item \code{species} contains species names (characters)
 \item \code{ancestral_species} contains ancestral species names (characters)
-\item (optionally, if immigration is enabled) \code{root_species} (characters), the
-mainland species that this species' clade originates from.
+\item \code{founder} (characters), the mainland species that this species' clade originates from.
 }}
 
 \item{trait_ind}{numeric. Trait value \code{z} of a focal individual.}
@@ -45,9 +44,8 @@ columns:
 \itemize{
 \item \code{z} contains (numeric) traits values
 \item \code{species} contains species names (characters)
-\item \code{ancestral_species} contains acnestral species names (characters)
-\item (optionally, if immigration is enabled) \code{root_species} (characters), the
-mainland species that this species' clade originates from.
+\item \code{ancestral_species} contains ancestral species names (characters)
+\item \code{founder} (characters), the mainland species that this species' clade originates from.
 }}
 
 \item{mainland_comm}{a tibble defining what species exist in the mainland and

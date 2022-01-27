@@ -19,7 +19,7 @@ plot_zt <- function(comsie_tbl, fill_by = "species", xlim, ylim, binwidths = c(1
   if (fill_by == "species") {
     comsie_tbl <- comsie_tbl %>% dplyr::rename("fill_var" = species)
   } else if (fill_by == "clade"){
-    comsie_tbl <- comsie_tbl %>% dplyr::rename("fill_var" = root_species)
+    comsie_tbl <- comsie_tbl %>% dplyr::rename("fill_var" = founder)
   } else {
     stop("\"fill_by\" must be either species or clade.")
   }

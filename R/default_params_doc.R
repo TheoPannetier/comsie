@@ -9,17 +9,15 @@
 #'  * `z` contains (numeric) traits values
 #'  * `species` contains species names (characters)
 #'  * `ancestral_species` contains ancestral species names (characters)
-#'  * (optionally, if immigration is enabled) `root_species` (characters), the
-#'  mainland species that this species' clade originates from.
+#'  * `founder` (characters), the mainland species that this species' clade originates from.
 #'
 #' @param island_comm a tibble with one row per individual in the community and three
 #' columns:
 #'
 #'  * `z` contains (numeric) traits values
 #'  * `species` contains species names (characters)
-#'  * `ancestral_species` contains acnestral species names (characters)
-#'  * (optionally, if immigration is enabled) `root_species` (characters), the
-#'  mainland species that this species' clade originates from.
+#'  * `ancestral_species` contains ancestral species names (characters)
+#'  * `founder` (characters), the mainland species that this species' clade originates from.
 #'
 #' @param mainland_comm a tibble defining what species exist in the mainland and
 #' their trait distribution. One row per species, three columns:

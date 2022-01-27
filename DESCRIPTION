@@ -1,7 +1,7 @@
 Package: comsie
 Type: Package
 Title: R implementation of a Competitive Radiation model
-Version: 0.2.0
+Version: 0.2.1
 Author: Theo Pannetier
 Maintainer: Theo Pannetier <t.s.c.pannetier@rug.nl>
 Description: Individual-based simulation of diversification with Lotka-Volterra 

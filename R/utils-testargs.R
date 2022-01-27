@@ -20,10 +20,10 @@ test_island_comm <- function(comm) {
   if (!length(attributes(comm)$names) %in% 3:4) {
     stop("'", substitute(comm), "' should have 3 or 4 columns.")
   }
-  if (any(!attributes(comm)$names %in% c("z", "species", "ancestral_species", "root_species"))) {
+  if (any(!attributes(comm)$names %in% c("z", "species", "ancestral_species", "founder"))) {
     stop(
       "'", substitute(comm),
-      "' should have columns 'z', 'species', 'ancestral_species' and (optionally) 'root_species'."
+      "' should have columns 'z', 'species', 'ancestral_species' and (optionally) 'founder'."
     )
   }
   col_classes <- c(
@@ -52,11 +52,11 @@ test_comsie_tbl <- function(comsie_tbl) {
     stop("'", substitute(comsie_tbl), "' should have 4 or 5 columns.")
   }
   if (any(
-    !attributes(comsie_tbl)$names %in% c("t", "z", "species", "ancestral_species", "root_species")
+    !attributes(comsie_tbl)$names %in% c("t", "z", "species", "ancestral_species", "founder")
   )) {
     stop(
       "'", substitute(comsie_tbl),
-      "' should have columns 't', z', 'species', 'ancestral_species' and (optionally) 'root_species'."
+      "' should have columns 't', z', 'species', 'ancestral_species' and (optionally) 'founder'."
     )
   }
   col_classes <- c(
@@ -71,7 +71,7 @@ test_comsie_tbl <- function(comsie_tbl) {
       "' col classes should be numeric, character and character, respectively."
     )
   }
-  if (ncol(comsie_tbl) == 5 && !class(comsie_tbl$root_species) == "character") {
+  if (ncol(comsie_tbl) == 5 && !class(comsie_tbl$founder) == "character") {
     stop(
       "'", substitute(comsie_tbl),
       "' col classes should be numeric, character, character and character, respectively."

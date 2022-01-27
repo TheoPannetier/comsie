@@ -2,10 +2,16 @@
 % Please edit documentation in R/default_comsie_pars.R
 \name{default_pars}
 \alias{default_pars}
+\alias{default_carrying_cap_sd}
+\alias{default_competition_sd}
 \alias{default_mainland_nb_species}
 \alias{default_mainland_z_sd}
 \title{Default parameter values}
 \usage{
+default_carrying_cap_sd()
+
+default_competition_sd()
+
 default_mainland_nb_species()
 
 default_mainland_z_sd()

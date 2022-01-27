@@ -28,7 +28,8 @@ create_mainland_comm <- function(mainland_nb_species,
   mainland_comm <- tibble::tibble(
     "species" = species_names,
     "mean_z" = mean_zs,
-    "sd_z" = mainland_z_sd
+    "sd_z" = mainland_z_sd,
+    "nb_immig_events" = 0
   )
   return(mainland_comm)
 }

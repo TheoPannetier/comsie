@@ -34,7 +34,7 @@ read_comsie_tbl <- function(path_to_file, skip = NULL) {
       readr::col_number(),    # z
       readr::col_character(), # species
       readr::col_character(), # ancestral_species
-      readr::col_character() # root_species
+      readr::col_character() # founder
     )
   )
   return(comsie_tbl)

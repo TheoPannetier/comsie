@@ -3,6 +3,8 @@
 export("%>%")
 export(apply_speciation)
 export(create_mainland_comm)
+export(default_carrying_cap_sd)
+export(default_competition_sd)
 export(default_mainland_nb_species)
 export(default_mainland_z_sd)
 export(draw_comm_next_gen)
