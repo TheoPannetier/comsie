@@ -7,7 +7,7 @@
 run_simulation(
   path_to_output,
   nb_gens,
-  immigration_rate = NA,
+  immigration_rate,
   mainland_nb_species = comsie::default_mainland_nb_species(),
   mainland_z_sd = comsie::default_mainland_z_sd(),
   growth_rate = comrad::default_growth_rate(),
@@ -33,7 +33,7 @@ community is returned at the end of the simulation.}
 \item{nb_gens}{integer, the number of generations to run the
 simulation for.}
 
-\item{immigration_rate}{\code{NA} or a positive number, the rate at which
+\item{immigration_rate}{a positive number, the rate at which
 external immigrant populations enter the community.}
 
 \item{mainland_nb_species}{integer, the number of species in the island

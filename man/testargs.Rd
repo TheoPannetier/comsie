@@ -17,8 +17,7 @@ columns:
 \item \code{z} contains (numeric) traits values
 \item \code{species} contains species names (characters)
 \item \code{ancestral_species} contains ancestral species names (characters)
-\item (optionally, if immigration is enabled) \code{root_species} (characters), the
-mainland species that this species' clade originates from.
+\item \code{founder} (characters), the mainland species that this species' clade originates from.
 }}
 
 \item{comsie_tbl}{a tibble containing the output of a \code{comrad} simulation,
