@@ -63,7 +63,7 @@ draw_comm_next_gen <- function(
     "z" = rep(island_comm$z, nb_offspring_comm),
     "species" = rep(island_comm$species, nb_offspring_comm),
     "ancestral_species" = rep(island_comm$ancestral_species, nb_offspring_comm),
-    "founder" = rep(island_comm$root_species, nb_offspring_comm)
+    "founder" = rep(island_comm$founder, nb_offspring_comm)
     # new community inherits traits and species from parents
   )
   comrad::testarg_length(new_comm$z, sum(nb_offspring_comm))
