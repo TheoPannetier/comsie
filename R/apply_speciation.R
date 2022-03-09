@@ -110,7 +110,7 @@ apply_speciation <- function(island_comm, mainland_comm, trait_dist_sp = comrad:
       }
       cat("\nSpecies", sp, "turned into species", new_sp, "by anagenesis.")
       island_comm$species[where] <- new_sp
-      island_comm$ancestral_species <- sp
+      island_comm$ancestral_species[where] <- sp
     }
   }
   return(island_comm)
