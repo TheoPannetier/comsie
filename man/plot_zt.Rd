@@ -6,9 +6,9 @@
 \usage{
 plot_zt(
   comsie_tbl,
-  fill_by = "species",
-  xlim,
-  ylim,
+  fill_by = "clade",
+  xlim = c(0, max(comsie_tbl$t)),
+  ylim = c(-7.5, 7.5),
   binwidths = c(100, 0.01),
   alpha = 1
 )

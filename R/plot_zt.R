@@ -14,7 +14,7 @@
 #' @param alpha the ggplot parameter
 #'
 #' @export
-plot_zt <- function(comsie_tbl, fill_by = "species", xlim, ylim, binwidths = c(100, 0.01), alpha = 1) {
+plot_zt <- function(comsie_tbl, fill_by = "clade", xlim = c(0, max(comsie_tbl$t)), ylim = c(-7.5, 7.5), binwidths = c(100, 0.01), alpha = 1) {
 
   if (fill_by == "species") {
     comsie_tbl <- comsie_tbl %>% dplyr::rename("fill_var" = species)
@@ -23,8 +23,8 @@ plot_zt <- function(comsie_tbl, fill_by = "species", xlim, ylim, binwidths = c(1
   } else {
     stop("\"fill_by\" must be either species or clade.")
   }
-  colour_names <- unique(comsie_tbl$fill_var)
-  names(colour_names) <- colour_names
+  colour_names <- substr(unique(comsie_tbl$fill_var), 1, 7)
+  names(colour_names) <- unique(comsie_tbl$fill_var)
 
   gg <- comsie_tbl %>%
     ggplot2::ggplot(ggplot2::aes(x = t, y = z)) +
