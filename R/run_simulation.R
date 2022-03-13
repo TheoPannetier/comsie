@@ -196,7 +196,7 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
     # make 10 copies of that immigrant to make sure init pop survives
     dplyr::slice_sample(n = 10, replace = TRUE) %>%
     dplyr::mutate("t" = 0, .before = 1)
-  cat("\nSpecies", unique(immigration$immigrant_pop$species), "immigrated on the island.")
+  cat("\nSpecies", unique(immigration$immigrant_pop$species),  "immigrated with value", unique(immigration$immigrant_pop$z))
 
   # Set up data output table proper
   comsie_tbl <- init_comm
@@ -246,7 +246,7 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
       mainland_comm <- immigration$mainland_comm
       immigrant_pop <- immigration$immigrant_pop %>%
         dplyr::mutate("t" = t, .before = 1)
-      cat("\nSpecies", unique(immigrant_pop$species), "immigrated on the island.")
+      cat("\nSpecies", unique(immigrant_pop$species), "immigrated with value", immigrant_pop$z)
       comsie_tbl <- dplyr::bind_rows(comsie_tbl, immigrant_pop)
       next_immigration <- t + (1 + stats::rgeom(1, prob = immigration_rate))
     }
