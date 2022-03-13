@@ -15,7 +15,7 @@ read_events_from_log <- function(path_to_log) {
   immig_tbl <- tibble::tibble(
     "t" = sampling_times,
     "species" = immig_events,
-    "ancestor" = immig_events,
+    "ancestor" = as.character(NA),
     "event" = "immigration"
   ) %>%
     # Exclude lines that are neither time or immigration

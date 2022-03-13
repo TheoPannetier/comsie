@@ -164,6 +164,8 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
     z_range = z_range,
     mainland_z_sd = mainland_z_sd
   )
+  # Initiate record of all spec
+  used_species_names <- unique(mainland_comm$species)
 
   if (!is.null(path_to_output)) {
     cat(
@@ -194,6 +196,7 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
     # make 10 copies of that immigrant to make sure init pop survives
     dplyr::slice_sample(n = 10, replace = TRUE) %>%
     dplyr::mutate("t" = 0, .before = 1)
+  cat("\nSpecies", unique(immigration$immigrant_pop$species), "immigrated on the island.")
 
   # Set up data output table proper
   comsie_tbl <- init_comm
@@ -215,6 +218,7 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
 
   # Go :)
   for (t in time_seq) {
+    cat("\nt = ", t, " / ", nb_gens)
     # Track changes in community composition
     species_before <- unlist(dplyr::distinct(comsie_tbl, species))
 
@@ -231,7 +235,8 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
         carrying_cap_sd = carrying_cap_sd,
         mutation_sd = mutation_sd,
         trait_dist_sp = trait_dist_sp,
-        brute_force_opt = brute_force_opt
+        brute_force_opt = brute_force_opt,
+        used_species_names = used_species_names
       )
     )
 
@@ -246,8 +251,13 @@ run_simulation <- function( # nolint, ignore high cyclomatic complexity
       next_immigration <- t + (1 + stats::rgeom(1, prob = immigration_rate))
     }
 
-    # Track changes in community composition
+    # Track changes in community composition (for sampling)
     species_after <- unlist(dplyr::distinct(comsie_tbl, species))
+    # Update used names record
+    used_species_names <- append(
+      used_species_names,
+      species_after[!species_after %in% used_species_names]
+    )
 
     # Resolve whole-community extinction
     if (nrow(comsie_tbl) < 1) {

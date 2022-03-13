@@ -23,7 +23,8 @@ draw_comm_next_gen <- function(
   carrying_cap_sd = comrad::default_carrying_cap_sd(),
   mutation_sd = comrad::default_mutation_sd(),
   trait_dist_sp = comrad::default_trait_dist_sp(),
-  brute_force_opt = "none"
+  brute_force_opt = "none",
+  used_species_names
 ) {
   # Test argument type ---------------------------------------------------------
   comsie::test_island_comm(island_comm)
@@ -81,7 +82,8 @@ draw_comm_next_gen <- function(
   new_comm <- comsie::apply_speciation(
     island_comm = new_comm,
     mainland_comm = mainland_comm,
-    trait_dist_sp = trait_dist_sp
+    trait_dist_sp = trait_dist_sp,
+    used_species_names = used_species_names
   )
   comsie::test_island_comm(new_comm)
 
