@@ -10,7 +10,7 @@ read_events_from_log <- function(path_to_log) {
   sampling_times <- as.numeric(stringr::str_match(lines, time_str)[, 2])
 
   # Read immigration
-  immig_str <- "Species (#[:alnum:]{6}) immigrated on the island."
+  immig_str <- "Species (#[:alnum:]{6}) immigrated with value [:digit:]\\.[:digit:]+"
   immig_events <- stringr::str_match(lines, immig_str)[, 2]
   immig_tbl <- tibble::tibble(
     "t" = sampling_times,
@@ -29,14 +29,16 @@ read_events_from_log <- function(path_to_log) {
   immig_tbl <- immig_tbl[!is.na(immig_tbl$species), ]
 
   # Read cladogenesis
-  clado_str <- "Species (#[:alnum:]{6}) split from species (#[:alnum:]{6})"
-  clado_events <- stringr::str_match(lines, clado_str)[, 2:3]
+  clado_str <- "Species (#[:alnum:]{6}) and (#[:alnum:]{6}) split from species (#[:alnum:]{6})"
+  clado_events <- stringr::str_match(lines, clado_str)[, 2:4]
   clado_tbl <- tibble::tibble(
     "t" = sampling_times,
-    "species" = clado_events[, 1],
-    "ancestor" = clado_events[, 2],
+    "species_1" = clado_events[, 1],
+    "species_2" = clado_events[, 2],
+    "ancestor" = clado_events[, 3],
     "event" = "cladogenesis"
-  ) %>%
+  )  %>%
+    pivot_longer(cols = species_1:species_2, values_to = "species", names_to = NULL) %>%
     # Exclude lines that are neither time or immigration
     dplyr::filter(!(is.na(t) & is.na(species)))
   # Find time corresponding to each immigration event
