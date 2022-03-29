@@ -10,7 +10,7 @@ read_events_from_log <- function(path_to_log) {
   sampling_times <- as.numeric(stringr::str_match(lines, time_str)[, 2])
 
   # Read immigration
-  immig_str <- "Species (#[:alnum:]{6}) immigrated with value [:digit:]\\.[:digit:]+"
+  immig_str <- "Species (#[:alnum:]{6}) immigrated with value -?[:digit:]\\.[:digit:]+"
   immig_events <- stringr::str_match(lines, immig_str)[, 2]
   immig_tbl <- tibble::tibble(
     "t" = sampling_times,

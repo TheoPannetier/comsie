@@ -19,7 +19,13 @@ plot_zt <- function(comsie_tbl, fill_by = "clade", xlim = c(0, max(comsie_tbl$t)
   if (fill_by == "species") {
     comsie_tbl <- comsie_tbl %>% dplyr::rename("fill_var" = species)
   } else if (fill_by == "clade"){
-    comsie_tbl <- comsie_tbl %>% dplyr::rename("fill_var" = founder)
+    if (names(comsie_tbl)[5] == "founder") {
+      comsie_tbl <- comsie_tbl %>% dplyr::rename("fill_var" = founder)
+    } else if (names(comsie_tbl)[5] == "mainland_sp") {
+      comsie_tbl <- comsie_tbl %>% dplyr::rename("fill_var" = mainland_sp)
+    } else {
+      stop("Couldn't find clade column")
+    }
   } else {
     stop("\"fill_by\" must be either species or clade.")
   }
