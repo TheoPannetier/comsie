@@ -34,12 +34,18 @@ build_comsie_spp_tbl <- function(comsie_tbl) {
       is_sp <- comsie_tbl$species == sp
       time_range <- unique(comsie_tbl$t[is_sp])
       time_birth <- min(time_range)
-      occur_last <- max(time_range)
-      time_death <- ifelse(
-        occur_last == max(time_seq), # is present?
-        occur_last, # not extinct at present
-        time_seq[which(time_seq == occur_last) + 1] # extinct at first non-occurrence
-      )
+      last_occurrence <- max(time_range)
+      present <- max(time_seq)
+      is_extinct <- last_occurrence != present
+      has_descendant <- any(comsie_tbl$ancestral_species == sp, na.rm = TRUE)
+      if (is_extinct) {
+        time_death <- time_seq[which(time_seq == last_occurrence) + 1] # first non-occurrence
+        if (time_death == present & !has_descendant) {
+          time_death <- last_occurrence
+        }
+      } else {
+        time_death <- present
+      }
       ancestor_name <- unique(
         comsie_tbl$ancestral_species[is_sp]
       )
