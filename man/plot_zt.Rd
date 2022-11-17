@@ -28,8 +28,8 @@ rectangles.}
 \item{alpha}{the ggplot parameter}
 }
 \description{
-Updated version of \code{\link[comrad:plot_comm_traits_evolution]{comrad::plot_comm_traits_evolution()}}.
-Main difference is the (faster) use of rectangles instead of hexes to
+A forked version of the of \href{https://github.com/TheoPannetier/comrad/blob/master/R/plot_comm_trait_evolution.R}{\code{comrad::plot_comm_traits_evolution()}}.
+The main difference is the (faster) use of rectangles instead of hexes to
 represent occupied areas of the trait distribution, and more straightforwards
 plotting options.
 }

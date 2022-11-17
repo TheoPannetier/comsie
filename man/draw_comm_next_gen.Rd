@@ -14,7 +14,8 @@ draw_comm_next_gen(
   carrying_cap_sd = comrad::default_carrying_cap_sd(),
   mutation_sd = comrad::default_mutation_sd(),
   trait_dist_sp = comrad::default_trait_dist_sp(),
-  brute_force_opt = "none"
+  brute_force_opt = "none",
+  used_species_names
 )
 }
 \arguments{

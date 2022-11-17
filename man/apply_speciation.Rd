@@ -7,6 +7,7 @@
 apply_speciation(
   island_comm,
   mainland_comm,
+  used_species_names,
   trait_dist_sp = comrad::default_trait_dist_sp()
 )
 }

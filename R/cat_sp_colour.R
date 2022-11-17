@@ -2,8 +2,7 @@
 #'
 #' @param sp_name character, a 6-digit hex code for a colour that also serves as
 #' name for the species
-#'
-#' @bg logical, should the colour apply to the background?
+#' @param bg logical, should the colour apply to the background?
 #'
 #' @export
 #'

@@ -1,7 +1,7 @@
 #' Plot trait distribution through time
 #'
-#' Updated version of [comrad::plot_comm_traits_evolution()].
-#' Main difference is the (faster) use of rectangles instead of hexes to
+#' A forked version of the of [`comrad::plot_comm_traits_evolution()`](https://github.com/TheoPannetier/comrad/blob/master/R/plot_comm_trait_evolution.R).
+#' The main difference is the (faster) use of rectangles instead of hexes to
 #' represent occupied areas of the trait distribution, and more straightforwards
 #' plotting options.
 #'

@@ -1,7 +1,5 @@
 #' Assert a function argument is of correct type
 #'
-#' @param arg value of the asserted argument.
-#'
 #' @author Theo Pannetier
 #'
 #' @name testargs

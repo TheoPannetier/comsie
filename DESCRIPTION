@@ -1,7 +1,7 @@
 Package: comsie
 Type: Package
 Title: R implementation of a Competitive Radiation model
-Version: 0.3.1
+Version: 0.4.0
 Author: Theo Pannetier
 Maintainer: Theo Pannetier <t.s.c.pannetier@rug.nl>
 Description: Individual-based simulation of diversification with Lotka-Volterra 
@@ -12,9 +12,8 @@ LazyData: true
 Suggests: 
     testthat (>= 2.1.0),
     knitr,
-    lattice,
-    gganimate,
-    nLTT
+    glue,
+    crayon
 Imports:
     comrad,
     ape,
@@ -26,7 +25,6 @@ Imports:
     tidyr,
     purrr,
     stringr,
-    viridis,
     rmarkdown,
     charlatan,
     rappdirs,
@@ -34,7 +32,7 @@ Imports:
     RcppXsimd,
     subplex
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 VignetteBuilder: knitr
 LinkingTo: 
     Rcpp, RcppXsimd

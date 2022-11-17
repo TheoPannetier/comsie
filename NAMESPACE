@@ -2,6 +2,9 @@
 
 export("%>%")
 export(apply_speciation)
+export(build_comsie_spp_tbl)
+export(build_newick_tbl)
+export(cat_sp_colour)
 export(create_mainland_comm)
 export(default_carrying_cap_sd)
 export(default_competition_sd)

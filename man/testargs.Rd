@@ -22,8 +22,6 @@ columns:
 
 \item{comsie_tbl}{a tibble containing the output of a \code{comrad} simulation,
 as produced by \code{\link[=run_simulation]{run_simulation()}}.}
-
-\item{arg}{value of the asserted argument.}
 }
 \description{
 Assert a function argument is of correct type

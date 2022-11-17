@@ -2,7 +2,7 @@
 #'
 #' @param path_to_log character, path to the log file
 #'
-#' @retura a tibble with variables t, species, ancestor, event
+#' @return a tibble with variables t, species, ancestor, event
 #' @export
 read_events_from_log <- function(path_to_log) {
   lines <- readr::read_lines(path_to_log)

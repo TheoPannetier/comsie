@@ -1,3 +1,14 @@
+#' Convert a species history table to a Newick string
+#'
+#' Reads a tibble recording species birth, death and phylogenetic relations,
+#' figures out the branch lengths and return a phylogenetic tree in Newick
+#' format. Based on [DDD::L2phylo()].
+#'
+#' @param spp_tbl a table with phylogenetic information for each species, the
+#' output of [build_comsie_spp_tbl()]
+#'
+#' @author Théo Pannetier
+#' @export
 build_newick_tbl <- function(spp_tbl) {
   # species must be ordered by chronological order
   newick_tbl <- spp_tbl[order(spp_tbl$time_birth), ]
@@ -10,7 +21,7 @@ build_newick_tbl <- function(spp_tbl) {
     stop("One or more ancestors absent from species record.")
   }
   # Identify sister taxa
-  newick_tbl$sister_name <- map_chr(1:nrow(newick_tbl), function (i) {
+  newick_tbl$sister_name <- purrr::map_chr(1:nrow(newick_tbl), function (i) {
     parent <- newick_tbl$ancestor_name[i]
     t_birth <- newick_tbl$time_birth[i]
     sister_name <- newick_tbl$species_name[-i][which(

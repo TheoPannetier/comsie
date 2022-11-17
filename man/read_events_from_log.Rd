@@ -9,6 +9,9 @@ read_events_from_log(path_to_log)
 \arguments{
 \item{path_to_log}{character, path to the log file}
 }
+\value{
+a tibble with variables t, species, ancestor, event
+}
 \description{
 Read the sequence of events in a simulation from its log
 }

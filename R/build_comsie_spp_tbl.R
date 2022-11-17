@@ -1,6 +1,6 @@
-#' Extracts phylogenetic information from a `comrad` simulation
+#' Extracts phylogenetic information from a `comsie` simulation
 #'
-#' Reads the output of a `comrad` simulation and creates a table containing
+#' Reads the output of a `comsie` simulation and creates a table containing
 #' the necessary information about every species to make a phylogeny.
 #'
 #' @inheritParams default_params_doc
